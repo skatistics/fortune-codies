@@ -12,7 +12,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-dvh flex flex-col justify-center">
       <QuoteContainer data={data} />
     </div>
   );
