@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import QuoteContainer from "./components/QuoteContainer";
+import Cookie from "./components/Cookie";
 
 function App() {
   const [data, setData] = useState({ id: "", author: "", en: "" });
@@ -13,7 +14,8 @@ function App() {
 
   return (
     <div className="min-h-dvh flex flex-col justify-center">
-      <QuoteContainer data={data} />
+      {/* <QuoteContainer data={data} /> */}
+      <Cookie />
     </div>
   );
 }
