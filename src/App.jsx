@@ -14,8 +14,7 @@ function App() {
 
   return (
     <div className="min-h-dvh flex flex-col justify-center">
-      {/* <QuoteContainer data={data} /> */}
-      <Cookie />
+      <Cookie data={data} />
     </div>
   );
 }
