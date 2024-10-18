@@ -13,7 +13,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-dvh flex flex-col justify-center">
+    <div className="min-h-dvh">
       <Cookie data={data} />
     </div>
   );
