@@ -8,10 +8,12 @@ export default {
     extend: {
       animation: {
         "pop-in": "popIn 0.3s linear",
+        "break-left-xl": "breakLeftXL 0.7s ease-in forwards",
+        "break-right-xl": "breakRightXL 0.7s ease-in forwards",
         "break-left": "breakLeft 0.7s ease-in forwards",
         "break-right": "breakRight 0.7s ease-in forwards",
         "fall-out": "fallOut 0.7s ease-in forwards",
-        "fold-out": "foldOut 0.7s ease-in forwards",
+        "fold-out": "foldOut 0.5s ease-in forwards",
       },
       keyframes: {
         popIn: {
@@ -25,36 +27,68 @@ export default {
             transform: "scale(1)",
           },
         },
-        breakLeft: {
+        breakLeftXL: {
           "0%": {
-            transform: "translateX(0) rotate(25deg)",
+            transform: "translateX(0) rotate(10deg)",
           },
-          "30%,40%": {
-            transform: "translateX(0) rotate(55deg)",
+          "70%": {
+            transform: "translateX(-1200px) rotate(25deg)",
           },
-          "70%,80%": {
+          "80%": {
             opacity: "1",
-            transform: "translateX(-14em) rotate(50deg)",
+            transform: "translateX(-1000px) rotate(50deg)",
           },
           "100%": {
             opacity: "0",
-            transform: "translateX(-14em) rotate(50deg)",
+            transform: "translateX(-1000px) rotate(50deg)",
+          },
+        },
+        breakLeft: {
+          "0%": {
+            transform: "translateX(0) rotate(10deg)",
+          },
+          "70%": {
+            transform: "translateX(-80vw) rotate(25deg)",
+          },
+          "80%": {
+            opacity: "1",
+            transform: "translateX(-1000px) rotate(50deg)",
+          },
+          "100%": {
+            opacity: "0",
+            transform: "translateX(-1000px) rotate(50deg)",
+          },
+        },
+        breakRightXL: {
+          "0%": {
+            transform: "translateX(0) rotate(-10deg)",
+          },
+          "70%": {
+            transform: "translateX(1200px) rotate(-25deg)",
+          },
+          "80%": {
+            opacity: "1",
+            transform: "translateX(1000px) rotate(-50deg)",
+          },
+          "100%": {
+            opacity: "0",
+            transform: "translateX(1000px) rotate(-50deg)",
           },
         },
         breakRight: {
           "0%": {
-            transform: "translateX(0) rotate(-25deg)",
+            transform: "translateX(0) rotate(-10deg)",
           },
-          "30%,40%": {
-            transform: "translateX(0) rotate(-55deg)",
+          "70%": {
+            transform: "translateX(80vw) rotate(-25deg)",
           },
-          "70%,80%": {
+          "80%": {
             opacity: "1",
-            transform: "translateX(14em) rotate(-50deg)",
+            transform: "translateX(1000px) rotate(-50deg)",
           },
           "100%": {
             opacity: "0",
-            transform: "translateX(14em) rotate(-50deg)",
+            transform: "translateX(1000px) rotate(-50deg)",
           },
         },
         fallOut: {
@@ -75,15 +109,9 @@ export default {
         },
         foldOut: {
           "0%": {
-            transform: "scale(0.23,0.7)",
+            transform: "scale(0,0)",
           },
-          "30%,40%": {
-            transform: "scale(0.5,0.7)",
-          },
-          "69%": {
-            transform: "scale(1,0.7)",
-          },
-          "74%,100%": {
+          "100%": {
             transform: "scale(1,1)",
           },
         },

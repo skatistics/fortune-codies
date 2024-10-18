@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuoteContainer from "./QuoteContainer";
+import CookieLeft from "../assets/img/cookieLeft.png";
+import CookieRight from "../assets/img/cookieRight.png";
 
 const Cookie = ({ data }) => {
   const [opened, setOpened] = useState(false);
@@ -9,101 +11,54 @@ const Cookie = ({ data }) => {
     setOpened(!opened);
   };
 
+  useEffect(() => {
+    const cookieOpener = document.getElementById("cookie-opener");
+
+    cookieOpener.addEventListener("click", handleClick, { once: true });
+  }, []);
+
+  useEffect(() => {
+    if (opened) {
+      const leftCookie = document.getElementById("left-cookie");
+      const rightCookie = document.getElementById("right-cookie");
+
+      var x = window.matchMedia("(min-width: 1280px)");
+      if (x.matches) {
+        console.log("add anim xl");
+        leftCookie.classList.add("animate-break-left-xl");
+        rightCookie.classList.add("animate-break-right-xl");
+      } else {
+        console.log("add anim");
+        leftCookie.classList.add("animate-break-left");
+        rightCookie.classList.add("animate-break-right");
+      }
+    }
+  }, [opened]);
+
   return (
     <button
+      id="cookie-opener"
       className={
-        ` block mt-[4.5em] mb-0 mx-auto w-[30em] h-[17em] focus:outline-transparent relative` +
-        (opened ? " w-[26em] h-[6em]" : " pop-in")
+        ` block mb-0 mx-auto w-full h-[500px] focus:outline-transparent relative ` +
+        (opened ? "" : " pop-in")
       }
       type="button"
-      onClick={handleClick}
     >
-      {/* left */}
-      <div
-        className={
-          `absolute top-0 w-[8em] h-[18em] z-[2] bg-current text-[#efaa5d]` +
-          (opened ? " animate-break-left" : "")
-        }
-        style={{
-          position: "absolute",
-          top: "0",
-          width: "8em",
-          height: "18em",
-          zIndex: "2",
-          background: "currentColor",
-          color: "#efaa5d",
-          borderRadius: "7em 1em 1em 7em / 50%",
-          boxShadow:
-            "0.5em 0 0 inset,0.5em 0.2em 0 inset,1em 0.2em 0 #fff6 inset,-0.75em 0 0 #0002 inset",
-          clipPath: "polygon(0% 0%, 68% 0%, 100% 30%, 100% 100%, 0% 100%)",
-          WebkitClipPath:
-            "polygon(0% 0%, 68% 0%, 100% 30%, 100% 100%, 0% 100%)",
-          left: "calc(50% - 5.4em)",
-          transform: "rotate(25deg)",
-          transformOrigin: "68% 0",
-        }}
-      ></div>
-      {/* right */}
-      <div
-        className={
-          `absolute top-0 w-[8em] h-[18em] z-[2] bg-current text-[#efaa5d]` +
-          (opened ? " animate-break-right" : "")
-        }
-        style={{
-          position: "absolute",
-          top: "0",
-          width: "8em",
-          height: "18em",
-          zIndex: "2",
-          background: "currentColor",
-          color: "#efaa5d",
-          borderRadius: "1em 7em 7em 1em / 50%",
-          boxShadow:
-            "-0.5em 0 0 inset,-0.5em 0.2em 0 inset,-1em 0.2em 0 #fff6 inset,0.75em 0 0 #0002 inset",
-          clipPath: "polygon(0% 30%, 32% 0%, 100% 0, 100% 100%, 0% 100%)",
-          WebkitClipPath: "polygon(0% 30%, 32% 0%, 100% 0, 100% 100%, 0% 100%)",
-          right: "calc(50% - 5.4em)",
-          transform: "rotate(-25deg)",
-          transformOrigin: "32% 0",
-        }}
-      ></div>
-      <div
-        className={
-          `absolute top-0 left-[calc(50%-0.4em)] w-[0.8em] h-[6em] z-[1]` +
-          (opened ? " animate-fall-out" : "")
-        }
-      >
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className={
-              `absolute top-0 w-[0.5em] h-[0.5em] rounded-[50%] bg-current text-[#efaa5d]` +
-              (i === 0
-                ? " top-[4%] left-[15%]"
-                : i === 1
-                ? " top-[20%] right-[15%]"
-                : i === 2
-                ? " top-[30%] left-[25%]"
-                : i === 3
-                ? " top-[45%] right-[25%]"
-                : i === 4
-                ? " top-[55%] left-[5%]"
-                : i === 5
-                ? " top-[65%] right-[5%]"
-                : i === 6
-                ? " top-[75%] left-[30%]"
-                : " top-[90%] right-[35%]")
-            }
-          ></div>
-        ))}
+      <div id="left-cookie" className={"absolute top-0 right-[50%] z-10"}>
+        <img src={CookieLeft} alt="Cookie" className="w-[250px]" />
       </div>
-      <div
-        className={
-          `absolute top-0 text-[#333333] flex flex-col justify-center py-[0.75em] px-[1.5em] text-center min-h-[10em] left-0 origin-[50%_32%] scale-x-0 scale-y-100 ` +
-          (opened ? " animate-fold-out" : "")
-        }
-      >
-        <QuoteContainer data={data} />
+      <div id="right-cookie" className={"absolute top-0 left-[50%] z-10"}>
+        <img src={CookieRight} alt="Cookie" className="w-[250px]" />
+      </div>
+      <div className="flex justify-center">
+        <div
+          className={
+            `absolute  min-h-[2em] w-[80%] xl:w-[1200px] mt-[80px] top-0 text-[#333333] flex flex-col justify-center origin-top py-[0.75em] px-[1.5em] text-center scale-x-0 scale-y-0 ` +
+            (opened ? " animate-fold-out" : "")
+          }
+        >
+          <QuoteContainer data={data} />
+        </div>
       </div>
     </button>
   );
